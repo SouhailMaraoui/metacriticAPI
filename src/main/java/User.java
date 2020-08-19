@@ -1,12 +1,11 @@
+import java.util.List;
+
 public class User {
 
     private String username;
-    private String totalGameReviewed;
-    private String GOT_Score;
-    private String TLOU_Score;
+    private List<Review> reviews;
 
-    public User()
-    {
+    public User() {
 
     }
 
@@ -14,27 +13,9 @@ public class User {
         this.username = username;
     }
 
-    public User(String username, String totalGameReviewed, String GOT_Score, String TLOU_Score) {
+    public User(String username, List<Review> reviews) {
         this.username = username;
-        this.totalGameReviewed = totalGameReviewed;
-        this.GOT_Score = GOT_Score;
-        this.TLOU_Score = TLOU_Score;
-    }
-
-    public String getGOT_Score() {
-        return GOT_Score;
-    }
-
-    public void setGOT_Score(String GOT_Score) {
-        this.GOT_Score = GOT_Score;
-    }
-
-    public String getTLOU_Score() {
-        return TLOU_Score;
-    }
-
-    public void setTLOU_Score(String TLOU_Score) {
-        this.TLOU_Score = TLOU_Score;
+        this.reviews = reviews;
     }
 
     public String getUsername() {
@@ -45,11 +26,15 @@ public class User {
         this.username = username;
     }
 
-    public String getTotalGameReviewed() {
-        return totalGameReviewed;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    public void setTotalGameReviewed(String totalGameReviewed) {
-        this.totalGameReviewed = totalGameReviewed;
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
     }
 }

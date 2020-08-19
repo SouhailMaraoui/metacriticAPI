@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -22,8 +23,6 @@ import java.util.Scanner;
 
 public class main {
 
-    private static List<User> users=new ArrayList<>();
-
     private static final int GOT_number_pages=79;
     private static final String GOT_USER_REVIEWS_URL="https://www.metacritic.com/game/playstation-4/ghost-of-tsushima/user-reviews";
     private static final String USER_URL="https://www.metacritic.com/user/";
@@ -32,31 +31,24 @@ public class main {
     public static void main(String[] args) throws IOException {
 
         //--------------------------------------------------------------------------------------------------------------
-        /*fetchUsers();
-
-        FileWriter usersFile = new FileWriter("users.txt");
-        for(User user:users)
-        {
-            usersFile.write(user.getUsername()+"\n");
-        }
-        System.out.println("total users=" + users.size() );
-        usersFile.close();*/
+        //fetchUsers();
 
         //--------------------------------------------------------------------------------------------------------------
-        //fillUserReviews();
+        fillUserReviews();
 
         //--------------------------------------------------------------------------------------------------------------
-        getStats();
+        //getStats();
 
     }
 
     private static void fetchUsers() throws IOException
     {
+        List<User> users=new ArrayList<>();
         for(int i=0;i<GOT_number_pages;i++)
         {
             OkHttpClient okHttp = new OkHttpClient();
             Request request = new Request.Builder().url(GOT_USER_REVIEWS_URL+"?page="+i).get().build();
-            System.out.println(GOT_USER_REVIEWS_URL+"?page="+i);
+            System.out.println((i+1)+"/"+GOT_number_pages+" ::: "+GOT_USER_REVIEWS_URL+"?page="+i);
             Document doc = Jsoup.parse(okHttp.newCall(request).execute().body().string());
 
             for(Element row : doc.select("div.name a"))
@@ -65,49 +57,72 @@ public class main {
             }
 
         }
+        FileWriter usersFile = new FileWriter("users.txt");
+        usersFile.write(users.size());
+        for(User user:users)
+        {
+            usersFile.write("\n"+user.getUsername());
+        }
+        usersFile.close();
 
     }
 
-    private static void fillUserReviews() throws IOException
-    {
+    private static void fillUserReviews() throws IOException {
         UserList users=new UserList();
 
         Scanner scanner = new Scanner(new File("users.txt"));
         int i=0;
+
+        String totalUsers="";
         while (scanner.hasNextLine())
         {
-            String username =scanner.nextLine();
-            OkHttpClient okHttp = new OkHttpClient();
-            Request request = new Request.Builder().url(USER_URL+username).get().build();
-            System.out.println(USER_URL+username);
-
-            Document doc = Jsoup.parse(okHttp.newCall(request).execute().body().string());
-
-            int gameReviewed=0;
-            String GOT_Score=null;
-            String TLOU_Score=null;
-            for(Element row : doc.select("div.review_stats"))
+            if(i==0)
             {
-                String game=row.select("div.review_product").select("div.product_title").text();
-                String score=row.select("div.review_score").text();
-                if(game.equals("Ghost of Tsushima")){GOT_Score=score;}
-                if(game.equals("The Last of Us Part II")){TLOU_Score=score;}
-
-                gameReviewed++;
+                totalUsers=scanner.nextLine();
+                System.out.println(totalUsers);
             }
-            User user=new User(username,String.valueOf(gameReviewed),GOT_Score,TLOU_Score);
-            users.add(user);
-            i++;
+            else{
+                //testing---REMOVE
+                if (i==3)
+                {
+                    break;
+                }
+                String username =scanner.nextLine();
+                OkHttpClient okHttp = new OkHttpClient();
+                Request request = new Request.Builder().url(USER_URL+username).get().build();
+                System.out.println(i+"/"+totalUsers+" ::: "+USER_URL+username);
 
-            System.out.println(i+"/7806");
+                Document doc = Jsoup.parse(okHttp.newCall(request).execute().body().string());
+
+                ReviewList reviews=new ReviewList();
+                for(Element row : doc.select("div.review_section.review_data"))
+                {
+                    Elements review_stats=row.select("div.review_stats");
+                    Elements review_body=row.select("div.review_body");
+
+                    String game=review_stats.select("div.review_product").select("div.product_title").text();
+                    String commentary=review_body.select("span.blurb.blurb_expanded").text();
+                    String date=review_stats.select("div.review_product").select("div.date").text();;
+                    String score=row.select("div.review_score").text();
+
+                    Review review=new Review(game,commentary,date,score);
+                    reviews.add(review);
+                }
+                User user=new User(username,reviews.getReviews());
+                users.add(user);
+            }
+            i++;
         }
         scanner.close();
 
         XStream xstream = new XStream();
         xstream.alias("user", User.class);
         xstream.alias("users", UserList.class);
-        xstream.addImplicitCollection(UserList.class, "list");
+        xstream.alias("review", Review.class);
+        xstream.alias("reviews", ReviewList.class);
 
+        xstream.addImplicitCollection(UserList.class, "list");
+        xstream.addImplicitCollection(ReviewList.class, "list");
 
         String xml = xstream.toXML(users);
         FileWriter usersXML = new FileWriter("users.xml");
@@ -117,7 +132,7 @@ public class main {
 
     private static void getStats() throws IOException {
 
-        String xml = Files.readString(Paths.get("users.xml"));
+        /*String xml = Files.readString(Paths.get("users.xml"));
 
         XStream xstream = new XStream();
         xstream.alias("user", User.class);
@@ -166,7 +181,7 @@ public class main {
         }
 
         System.out.println(User_oneReview);
-        System.out.println(User_twoReviews);
+        System.out.println(User_twoReviews);*/
 
     }
 
