@@ -1,4 +1,4 @@
-7806
+7826
 MarkGeralt
 Alajme
 leonard97
@@ -98,6 +98,7 @@ pdelguy
 user011
 Daermon
 RoshikageKira
+Danilocomin
 Javierus
 Stayhydrated
 KenFricken
@@ -333,7 +334,9 @@ SternRitter
 Doggokanjiz
 YuriOminousG
 Deimos-Master
+Karere
 Jinxster
+VegitoSama555
 Hacobo
 Lobzao
 JimmyConnor
@@ -480,7 +483,6 @@ ATRedline
 Marsk
 hgtmkt
 BaliCritic
-KennyAnderson
 redgrave-aw
 Kalash7446
 Rocketmantan
@@ -593,6 +595,9 @@ Rpggamer30
 Truemotu
 staygold132
 Dirodi
+Sandeegaming
+Obliivious
+faisal21
 maksfighter
 otisk93
 Rusty_
@@ -1071,7 +1076,6 @@ Tidurhduo7
 Virtualreview
 warminded
 Uisa
-Danilocomin
 Laighin
 drownmay
 GamerStiX
@@ -1195,9 +1199,6 @@ halfgandalf
 del_ky
 Gr33nt3a
 Brock2621
-Patoka23
-Nadim1984
-Drixterunie
 Bahaaltory
 Haamlux
 LOHOBES
@@ -1295,6 +1296,9 @@ Norsehammer0311
 Brokenpenguin07
 claudiofm
 leomauch
+cuervoxi
+RajaCulos3000
+darksondk
 cuervoxi
 RajaCulos3000
 darksondk
@@ -1568,6 +1572,7 @@ Crookedquill
 tommymarchesi
 HarleyDyna
 Leeroy1986
+Jake287
 TBG_87
 Frosty10
 LeoMaul
@@ -2099,6 +2104,7 @@ DragonMan85
 Asura
 Lassoguard
 Amiran
+WardaddyAUS
 MrButt0ns
 mehradbkn
 Aori1996
@@ -2280,8 +2286,10 @@ M_Raoof81
 jcoaki
 mohammadsrt
 Jonaskenazi1
+dallas82288
 ValorantIsTrash
 D3M0N07
+JoeYourtheHERO
 Pqstewart
 TaliMancer
 GAMERSPLANET
@@ -2535,10 +2543,8 @@ Brabbit76
 Coza999111
 orlandofurioso
 amarti9
-dallas82288
 HoodieKage
 CPFantastic
-JoeYourtheHERO
 Ronsar
 SlaughteRedLamb
 Hfor02
@@ -2581,6 +2587,7 @@ seboyce0409
 MarcDijkhuizen
 Humble_Rock
 Jackmacca
+HugeyBear
 KOVALJEV2001
 Rodaynet
 Petertoth2412
@@ -2673,7 +2680,6 @@ SirPY
 thatsscrazyy
 Arrngrim
 TheloniusFabdul
-john331
 Melvinrj
 Jubei90
 munson_roy-e
@@ -2722,7 +2728,6 @@ Rocksod
 Sadamka
 2IX
 B_urrito
-WardaddyAUS
 Paulo38Leao
 frozensun84
 Ghostifexp
@@ -2813,7 +2818,7 @@ LittleDemon
 Cafera13
 Young_Nacho
 Yusufhan
-Mark999
+john331
 Tetracaine
 jordankrush
 Damircritic
@@ -2977,7 +2982,6 @@ AresYon
 vinnievalff7
 MaxMad2099
 Casperwin
-HugeyBear
 NathanDTS
 The_Blood_Ghost
 racherache
@@ -3048,9 +3052,7 @@ Fozzie
 Pawelp
 Timmyaw
 CriticalRiview
-Wawi_lk
 Matin1382
-Mbi
 LexKur
 7_S0V
 Queenoliver
@@ -3086,6 +3088,7 @@ DonJeane
 Pragmatismo
 TessJ96815
 Vespertellino
+Mark999
 Brun00w
 Fredolives
 Obozrevatel
@@ -3119,7 +3122,8 @@ VongolaXth
 hastasz1505
 lepronoc
 WeskerGO
-aborkmga
+Wawi_lk
+Mbi
 EruNgatai
 Rguevara
 DiegoXpert
@@ -3136,12 +3140,13 @@ Reed618
 princessfurios
 superfields
 ajpt
+aborkmga
 jhoniy8
 FineCastleIRE
 ToguroYounger
 Wtbi_seriously
-Kelby777
 Alexandr1
+Kelby777
 Adept13
 Lushow
 Sarge_IV
@@ -3175,7 +3180,6 @@ Kokiduran
 BismarkAJH
 CHRISEVIL1
 gamer10211
-KTS0228
 alexds6
 TTRT
 Faxthtax
@@ -3185,6 +3189,7 @@ giovani1412
 HelpAhPanda
 KhaledJanahi
 Darkself13
+KTS0228
 Coffecoin
 saeram99
 Williamtpt
@@ -3757,11 +3762,8 @@ AngryBird
 Mohammad13855
 Why-bother
 Higgy
-Crom_Grimm
-Budafuko
 Betogv86
 Graphchiqovani
-LinkNellaGrotta
 IronBird
 Chuslol
 andgarciabr
@@ -3769,12 +3771,9 @@ gustave154
 Gecbass
 Pete01x
 skeetertbone
-SyFy4Lyfe
 Zambrotta
-andrewph4m
 LeonardoRSW
-Megalodon360
-GroovyPlanta
+TheChosenOne_
 Robert88
 Punccch
 BL0ODYHAMSTER
@@ -4676,8 +4675,6 @@ amalapadmanabha
 Bufu388
 Cem1923
 darksparda
-Karere
-VegitoSama555
 randomedragon
 UzumakiGhost
 Ray_rezende
@@ -5523,6 +5520,7 @@ Leo15
 TheScort
 E5Twnty4
 Telegram
+KennyAnderson
 slain_phantom
 AscendedHat
 MaxoChan
@@ -5924,16 +5922,13 @@ D_1784
 Oraoramuda
 hckhanh
 Parsaleilyabadi
-Sandeegaming
 Sajuuk1988
 kyledouglascox
 MAK-10
 Mskittani
-Obliivious
 Raptorium7
 psbox362
 phankienhung
-faisal21
 oOStealthBomber
 Kimzxcv
 MDrake69
@@ -7766,7 +7761,6 @@ h3aves
 notoriousTHC
 Marcelord
 HTGamer
-Jake287
 Oh_My_Grimm
 kcet0910
 Xilg
@@ -7805,3 +7799,29 @@ kdoggdracul
 Amiralikia
 dvin_06
 SABUMBA
+Jmmesserli
+ValBal
+Alex141
+Jasen_30
+Mansanews
+ThatGuy007
+nicodel26
+danielcwc
+MarlonBR2020
+Ethrocentaur
+gmzstation
+Honest-dude
+ballenf
+Crazyboldgamer
+Matthewhaluszcz
+Molec_man
+Thirles
+NotaIlowed
+Morthann
+SmokeytheeBear
+SlumWolf
+Azrael4922
+Val562
+TaroNaza
+Malimo2610
+BrandoNation23

@@ -16,10 +16,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class main {
 
@@ -28,21 +25,26 @@ public class main {
     private static final String USER_URL="https://www.metacritic.com/user/";
 
 
+    private static final Set<String> tlou_first_3days_dates= Set.of("Jun 19, 2020","Jun 20, 2020","Jun 21, 2020");
+    private static final Set<String> got_first_3days_dates= Set.of("Jul 18, 2020","Jul 19, 2020","Jul 20, 2020");
+
+
     public static void main(String[] args) throws IOException {
 
         //--------------------------------------------------------------------------------------------------------------
         //fetchUsers();
 
         //--------------------------------------------------------------------------------------------------------------
-        fillUserReviews();
+        //fillUserReviews();
 
         //--------------------------------------------------------------------------------------------------------------
-        //getStats();
+        //exportReviews();
 
+        //--------------------------------------------------------------------------------------------------------------
+        dataAnalysis();
     }
 
-    private static void fetchUsers() throws IOException
-    {
+    private static void fetchUsers() throws IOException {
         List<User> users=new ArrayList<>();
         for(int i=0;i<GOT_number_pages;i++)
         {
@@ -58,7 +60,7 @@ public class main {
 
         }
         FileWriter usersFile = new FileWriter("users.txt");
-        usersFile.write(users.size());
+        usersFile.write(users.size()+"");
         for(User user:users)
         {
             usersFile.write("\n"+user.getUsername());
@@ -79,14 +81,8 @@ public class main {
             if(i==0)
             {
                 totalUsers=scanner.nextLine();
-                System.out.println(totalUsers);
             }
             else{
-                //testing---REMOVE
-                if (i==3)
-                {
-                    break;
-                }
                 String username =scanner.nextLine();
                 OkHttpClient okHttp = new OkHttpClient();
                 Request request = new Request.Builder().url(USER_URL+username).get().build();
@@ -130,60 +126,141 @@ public class main {
         usersXML.close();
     }
 
-    private static void getStats() throws IOException {
+    private static void exportReviews() throws IOException {
+        FileWriter Got_Reviews_file = new FileWriter("GOT_Reviews.txt");
+        FileWriter TLOU_reviews_file = new FileWriter("TLOU_Reviews.txt");
+        FileWriter TLOU_3days_reviews_file = new FileWriter("TLOU_3days_Reviews.txt");
+        FileWriter reviews_file = new FileWriter("Reviews.txt");
 
-        /*String xml = Files.readString(Paths.get("users.xml"));
+        UserList users = getUsersFromXML();
 
-        XStream xstream = new XStream();
-        xstream.alias("user", User.class);
-        xstream.alias("users", UserList.class);
-        xstream.addImplicitCollection(UserList.class, "list");
-        UserList users = (UserList) xstream.fromXML(xml);
-
-        int GOT_reviews=users.size();
-        int TLOU_reviews=0;
-        int User_oneReview=0;
-        int User_twoReviews=0;
-        int[][] score_matrix=new int[11][11];
-
-        for(User user:users.getUsers())
-        {
-            if(user.getGOT_Score()!=null)
+        for(User user:users.getUsers()){
+            for(Review review:user.getReviews())
             {
-                if(user.getTLOU_Score()!=null)
-                {
-                    TLOU_reviews++;
-                    for(int i=0; i<11; i++)
-                    {
-                        if(user.getGOT_Score().equals(String.valueOf(i)))
-                        {
-                            int TLOU_score=Integer.parseInt(user.getTLOU_Score());
-                            score_matrix[i][TLOU_score]++;
-                        }
-                    }
-                    if(user.getGOT_Score().equals("10") && user.getTotalGameReviewed().equals("2"))
-                    {
-                        User_twoReviews++;
-                    }
+                if(review.getGameTitle().equals("Ghost of Tsushima")) {
+                    Got_Reviews_file.write(review.getCommentary()+"\n");
+                    reviews_file.write(review.getCommentary()+"\n");
                 }
-                if(user.getGOT_Score().equals("10") && user.getTotalGameReviewed().equals("1"))
-                {
-                    User_oneReview++;
+                if(review.getGameTitle().equals("The Last of Us Part II")) {
+                    if(tlou_first_3days_dates.contains(review.getDate()))
+                    {
+                        TLOU_3days_reviews_file.write(review.getCommentary());
+                    }
+                    TLOU_reviews_file.write(review.getCommentary()+"\n");
+                    reviews_file.write(review.getCommentary()+"\n");
                 }
             }
         }
 
-        System.out.print("Total reviews for GOT :" + GOT_reviews);
-        System.out.println(", of which " + TLOU_reviews+ " reviewed TLOU2 ("+(100.0*TLOU_reviews/GOT_reviews)+"%)");
-        for(int[] GOT:score_matrix)
-        {
-            System.out.println(Arrays.toString(GOT));
-        }
-
-        System.out.println(User_oneReview);
-        System.out.println(User_twoReviews);*/
-
+        Got_Reviews_file.close();
+        TLOU_reviews_file.close();
+        TLOU_3days_reviews_file.close();
+        reviews_file.close();
     }
 
+    private static void dataAnalysis() throws IOException {
 
+        UserList users = getUsersFromXML();
+
+        int[][] all_scores_matrix=new int[11][11];
+        int[][] first_3days_scores_matrix=new int[11][11];
+
+        for(User user:users.getUsers()) {
+            List<Review> reviews = user.getReviews();
+            Review tlou_review=null;
+            Review got_review=null;
+            for(Review review:reviews) {
+                if(review.getGameTitle().equals("Ghost of Tsushima")) {
+                    got_review=review;
+                }
+                if(review.getGameTitle().equals("The Last of Us Part II")) {
+                    tlou_review=review;
+                }
+            }
+            if(tlou_review!=null && got_review!=null){
+                all_scores_matrix[Integer.parseInt(got_review.getScore())][Integer.parseInt(tlou_review.getScore())]++;
+
+                if(tlou_first_3days_dates.contains(tlou_review.getDate()) && got_first_3days_dates.contains(got_review.getDate()))
+                {
+                    first_3days_scores_matrix[Integer.parseInt(got_review.getScore())][Integer.parseInt(tlou_review.getScore())]++;
+                }
+            }
+        }
+
+        drawMatrix(all_scores_matrix);
+        drawMatrix(first_3days_scores_matrix);
+        System.out.println();
+        
+        //--------Average score given to each game based on only written reviews
+        printAverageScore(all_scores_matrix,"Based on only written reviews");
+        System.out.println();
+
+        //--------Average score for each game for the first 3 days
+        printAverageScore(first_3days_scores_matrix,"Based on only written reviews in the first 3 days");
+    }
+
+    private static void drawMatrix(int[][] m)
+    {
+        for(int[] row:m) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+
+    private static void printAverageScore(int[][] m, String info)
+    {
+        float GOT_score=0;
+        int Got_total_reviewers=0;
+
+        float TLOU_score=0;
+        int TLOU_total_reviewers=0;
+
+        for(int i=0;i<11;i++)
+        {
+            GOT_score+=sumColumn(m,i)*i;
+            Got_total_reviewers+=sumColumn(m,i);
+        }
+        for(int j=0;j<11;j++)
+        {
+            TLOU_score+=sumRow(m,j)*j;
+            TLOU_total_reviewers+=sumRow(m,j);
+        }
+
+        GOT_score=GOT_score/Got_total_reviewers;
+        TLOU_score=TLOU_score/TLOU_total_reviewers;
+
+        System.out.println("Ghost of Tsushima score ("+info+") : "+GOT_score);
+        System.out.println("The Last of Us Part II score ("+info+") : "+TLOU_score);
+    }
+
+    private static int sumColumn(int[][] m,int col) {
+        int sum=0;
+        for(int n:m[col])
+        {
+            sum+=n;
+        }
+        return sum;
+    }
+    private static int sumRow(int[][] m,int row) {
+        int sum=0;
+        for(int[] col:m)
+        {
+            sum+=col[row];
+        }
+        return sum;
+    }
+
+    private static UserList getUsersFromXML() throws IOException {
+        String xml = Files.readString(Paths.get("users.xml"));
+
+        XStream xstream = new XStream();
+        xstream.alias("user", User.class);
+        xstream.alias("users", UserList.class);
+        xstream.alias("review", Review.class);
+        xstream.alias("reviews", ReviewList.class);
+
+        xstream.addImplicitCollection(UserList.class, "list");
+        xstream.addImplicitCollection(ReviewList.class, "list");
+
+        return (UserList) xstream.fromXML(xml);
+    }
 }

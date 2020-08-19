@@ -1,12 +1,15 @@
 import java.util.List;
 
+/*
+* Metacritic users who have reviewed
+*
+* */
 public class User {
 
     private String username;
     private List<Review> reviews;
 
     public User() {
-
     }
 
     public User(String username) {
