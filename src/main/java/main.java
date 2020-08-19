@@ -186,7 +186,7 @@ public class main {
         drawMatrix(all_scores_matrix);
         drawMatrix(first_3days_scores_matrix);
         System.out.println();
-        
+
         //--------Average score given to each game based on only written reviews
         printAverageScore(all_scores_matrix,"Based on only written reviews");
         System.out.println();
