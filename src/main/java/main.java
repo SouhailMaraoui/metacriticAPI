@@ -130,7 +130,6 @@ public class main {
         FileWriter Got_Reviews_file = new FileWriter("GOT_Reviews.txt");
         FileWriter TLOU_reviews_file = new FileWriter("TLOU_Reviews.txt");
         FileWriter TLOU_3days_reviews_file = new FileWriter("TLOU_3days_Reviews.txt");
-        FileWriter reviews_file = new FileWriter("Reviews.txt");
 
         UserList users = getUsersFromXML();
 
@@ -139,7 +138,6 @@ public class main {
             {
                 if(review.getGameTitle().equals("Ghost of Tsushima")) {
                     Got_Reviews_file.write(review.getCommentary()+"\n");
-                    reviews_file.write(review.getCommentary()+"\n");
                 }
                 if(review.getGameTitle().equals("The Last of Us Part II")) {
                     if(tlou_first_3days_dates.contains(review.getDate()))
@@ -147,7 +145,6 @@ public class main {
                         TLOU_3days_reviews_file.write(review.getCommentary());
                     }
                     TLOU_reviews_file.write(review.getCommentary()+"\n");
-                    reviews_file.write(review.getCommentary()+"\n");
                 }
             }
         }
@@ -155,7 +152,6 @@ public class main {
         Got_Reviews_file.close();
         TLOU_reviews_file.close();
         TLOU_3days_reviews_file.close();
-        reviews_file.close();
     }
 
     private static void dataAnalysis() throws IOException {
@@ -190,7 +186,7 @@ public class main {
         drawMatrix(all_scores_matrix);
         drawMatrix(first_3days_scores_matrix);
         System.out.println();
-        
+
         //--------Average score given to each game based on only written reviews
         printAverageScore(all_scores_matrix,"Based on only written reviews");
         System.out.println();

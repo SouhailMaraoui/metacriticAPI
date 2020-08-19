@@ -1,9 +1,5 @@
 import java.util.List;
 
-/*
-* Metacritic users who have reviewed
-*
-* */
 public class User {
 
     private String username;
